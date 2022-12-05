@@ -9,10 +9,10 @@ inputdata = np.asarray(lines)
 
 priority_sum_1 = 0
 for line in inputdata:
-    compartement_1 = np.asarray([c for c in line[:len(line)//2]])
-    compartement_2 = np.asarray([c for c in line[len(line)//2:]])
+    compartment_1 = np.asarray([c for c in line[:len(line)//2]])
+    compartment_2 = np.asarray([c for c in line[len(line)//2:]])
 
-    item = np.intersect1d(compartement_1, compartement_2)[0]
+    item = np.intersect1d(compartment_1, compartment_2)[0]
     priority_sum_1 += ord(item)-96 if item.islower() else ord(item)-38
     
 print(f"the sum of the priorities is {priority_sum_1}")
