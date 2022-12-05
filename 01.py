@@ -21,5 +21,5 @@ print(f"the elf carrying the most is carrying {np.max(elves_inventory)}")
 
 ############################## PART 2 ##############################
 
-sorted_inventory = np.sort(elves_inventory)
-print(f"the top three elves are carrying {sorted_inventory[-3:].sum()}")
+sorted_inventory = np.sort(elves_inventory)[::-1]
+print(f"the top three elves are carrying {sorted_inventory[:3].sum()}")
