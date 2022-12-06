@@ -5,13 +5,13 @@ import json
 
 class aoc_helper():
     def __init__(self) -> None:
-        self.ROOT_DIR = Path(__file__).parent.parent # ROOT_DIR is the advent-of-code-2022 folder
+        self.ROOT_DIR = Path(__file__).parent # ROOT_DIR is the advent-of-code-2022 folder
         self.TODAY = datetime.date.today()
         self.get_input()
         self.create_new_py()
         
     def get_session_cookie(self):
-        data = json.load(open(self.ROOT_DIR / 'aoc/config.json', 'r'))
+        data = json.load(open(self.ROOT_DIR / 'config.json', 'r'))
         return data['session_cookie']
         
     def get_input(self):
