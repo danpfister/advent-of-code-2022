@@ -35,3 +35,6 @@ class aoc_helper():
             print(f"created python file at {py_file_path}")
             return
         print("python file for current day already exists")
+        
+if __name__ == "__main__":
+    aoc_helper()
