@@ -11,7 +11,11 @@ class aoc_helper():
         self.create_new_py()
         
     def get_session_cookie(self):
-        data = json.load(open(self.ROOT_DIR / 'config.json', 'r'))
+        try:
+            data = json.load(open(self.ROOT_DIR / 'config.json', 'r'))
+        except:
+            print(f"reading config.json failed!")
+            raise
         return data['session_cookie']
         
     def get_input(self):
@@ -22,10 +26,14 @@ class aoc_helper():
             PARAMS = {
                 "User-Agent": 'https://github.com/danpfister/advent-of-code-2022',
             }
-            request = requests.get(url=URL, cookies={'session': SESSION_COOKIE}, params=PARAMS)
-            text_file_path.write_text(request.text)
-            print(f"downloaded input file to {text_file_path}")
-            return
+            try:
+                request = requests.get(url=URL, cookies={'session': SESSION_COOKIE}, params=PARAMS)
+                text_file_path.write_text(request.text)
+                print(f"downloaded input file to {text_file_path}")
+                return
+            except:
+                print(f"aoc request failed!")
+                raise
         print(f"input file for current day already exists")
     
     def create_new_py(self):
