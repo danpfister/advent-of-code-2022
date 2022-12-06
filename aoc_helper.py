@@ -26,7 +26,7 @@ class aoc_helper():
             text_file_path.write_text(request.text)
             print(f"downloaded input file to {text_file_path}")
             return
-        print(f"input file already exists")
+        print(f"input file for current day already exists")
     
     def create_new_py(self):
         py_file_path = self.ROOT_DIR / f"{self.TODAY.day:02}.py"
@@ -34,4 +34,4 @@ class aoc_helper():
             py_file_path.open("w", encoding="utf-8")
             print(f"created python file at {py_file_path}")
             return
-        print("python file already exists")
+        print("python file for current day already exists")
