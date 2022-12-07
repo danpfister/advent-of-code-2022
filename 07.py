@@ -59,16 +59,10 @@ def parse_input(inputdata):
     return root
 
 def set_dir_sizes(current_dir: dir):
-    if len(current_dir.dirs) == 0:
-        for file in current_dir.files:
-            current_dir.size += file.size
-        print(f"{current_dir} with size {current_dir.size}")
-        return current_dir.size
-    else:
-        for dir in current_dir.dirs:
-            current_dir.size += set_dir_sizes(dir)
-        for file in current_dir.files:
-            current_dir.size += file.size
+    for dir in current_dir.dirs:
+        current_dir.size += set_dir_sizes(dir)
+    for file in current_dir.files:
+        current_dir.size += file.size
     print(f"{current_dir} with size {current_dir.size}")
     return current_dir.size
 
