@@ -11,5 +11,6 @@ def find_unique_symbols(characters: str, length: int):
         if np.unique(symbols).shape[0] == length:
             return index+length
 
-print(f"found packet marker at index {find_unique_symbols(inputdata, 4)}")
-print(f"found packet marker at index {find_unique_symbols(inputdata, 14)}"
+if __name__ == "__main__":
+    print(f"found packet marker at index {find_unique_symbols(inputdata, 4)}")
+    print(f"found message marker at index {find_unique_symbols(inputdata, 14)}")
