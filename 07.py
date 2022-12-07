@@ -1,5 +1,6 @@
 import numpy as np
 import re
+import time
 
 class file():
     def __init__(self, size: int, name: str) -> None:
@@ -79,10 +80,36 @@ def get_smallest_possible_dir(required_space: int, current_best: dir, current_di
     if current_dir.size >= required_space and current_dir.size <= current_best.size:
         current_best = current_dir
     return current_best
+
+def printerbeepboop(pos: list, previous_pos: int, space: int, current_dir: dir):
+    dir_str =  get_formatted_string(pos, space, current_dir.name)
+    print(dir_str)
+    time.sleep(0.05)
+    pos.append(previous_pos)
+    for dir in current_dir.dirs:
+        printerbeepboop(pos, space, space+15, dir)
+    for file in current_dir.files:
+        pos.append(space)
+        file_str = get_formatted_string(pos, space+15, file.name)
+        print(file_str)
+        time.sleep(0.05)
+        pos.pop()
+    pos.pop()
+    return
+
+def get_formatted_string(pos: list, name_pos: int, name: str):
+    if name_pos == 0:
+        return name
+    name = " " + name
+    string = list(f"{name:->{name_pos}}")
+    string[:pos[-1]] = pos[-1] * [' ']
+    for i in pos:
+        string[i] = "'"
+    return ''.join(string)
     
             
 if __name__ == "__main__":
-    data = open(r"input\07.txt", 'r')
+    data = open(r".\input\07.txt", 'r')
     inputdata = np.asarray([line.strip() for line in data])
     root = parse_input(inputdata)
     set_dir_sizes(root)
@@ -92,3 +119,4 @@ if __name__ == "__main__":
     required_space = root.size - 40000000
     smallest_possible_dir = get_smallest_possible_dir(required_space, root, root)
     print(f"the smallest possible directory is {smallest_possible_dir} with size {smallest_possible_dir.size}")
+    if False: printerbeepboop([], 0, 0, root) # enable this for directory printing animation
