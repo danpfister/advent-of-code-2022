@@ -63,7 +63,6 @@ def set_dir_sizes(current_dir: dir):
         current_dir.size += set_dir_sizes(dir)
     for file in current_dir.files:
         current_dir.size += file.size
-    print(f"{current_dir} with size {current_dir.size}")
     return current_dir.size
 
 def get_dir_sizes(total_size: int, current_dir: dir):
@@ -73,6 +72,13 @@ def get_dir_sizes(total_size: int, current_dir: dir):
         total_size += current_dir.size
         return total_size
     return total_size
+
+def get_smallest_possible_dir(required_space: int, current_best: dir, current_dir: dir):
+    for dir in current_dir.dirs:
+        current_best = get_smallest_possible_dir(required_space, current_best, dir)
+    if current_dir.size >= required_space and current_dir.size <= current_best.size:
+        current_best = current_dir
+    return current_best
     
             
 if __name__ == "__main__":
@@ -82,3 +88,7 @@ if __name__ == "__main__":
     set_dir_sizes(root)
     ############################## PART 1 ##############################
     print(f"the sum of the directories with size <= 100000 is {get_dir_sizes(0, root)}")
+    ############################## PART 2 ##############################
+    required_space = root.size - 40000000
+    smallest_possible_dir = get_smallest_possible_dir(required_space, root, root)
+    print(f"the smallest possible directory is {smallest_possible_dir} with size {smallest_possible_dir.size}")
