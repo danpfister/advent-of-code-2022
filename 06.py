@@ -3,18 +3,13 @@ import numpy as np
 data = open(r"input\06.txt", 'r')
 inputdata = np.asarray([line.strip() for line in data])[0]
 
-############################## PART 1 ##############################
+############################## PART 1&2 ##############################
 
-for index in range(len(inputdata)-3):
-    symbols = [c for c in inputdata[index:index+4]]
-    if np.unique(symbols).shape[0] == 4:
-        print(f"found packet marker at index {index+4}")
-        break
+def find_unique_symbols(characters: str, length: int):
+    for index in range(len(inputdata)-length+1):
+        symbols = [c for c in characters[index:index+length]]
+        if np.unique(symbols).shape[0] == length:
+            return index+length
 
-############################## PART 2 ##############################
-
-for index in range(len(inputdata)-13):
-    symbols = [c for c in inputdata[index:index+14]]
-    if np.unique(symbols).shape[0] == 14:
-        print(f"found message marker at index {index+14}")
-        break
+print(f"found packet marker at index {find_unique_symbols(inputdata, 4)}")
+print(f"found packet marker at index {find_unique_symbols(inputdata, 14)}"
