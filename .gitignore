@@ -1,0 +1,4 @@
+config.json
+__pycache__
+test.py
+*_test.txt

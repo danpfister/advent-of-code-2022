@@ -12,4 +12,4 @@ def find_unique_symbols(characters: str, length: int):
             return index+length
 
 print(f"found packet marker at index {find_unique_symbols(inputdata, 4)}")
-print(f"found packet marker at index {find_unique_symbols(inputdata, 14)}")
+print(f"found packet marker at index {find_unique_symbols(inputdata, 14)}"
