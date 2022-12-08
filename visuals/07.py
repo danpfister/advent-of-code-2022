@@ -59,37 +59,34 @@ def parse_input(inputdata):
     
     return root
 
-def set_dir_sizes(current_dir: dir):
+def printerbeepboop(pos: list, previous_pos: int, space: int, current_dir: dir):
+    dir_str =  get_formatted_string(pos, space, current_dir.name)
+    print(dir_str)
+    time.sleep(0.05)
+    pos.append(previous_pos)
     for dir in current_dir.dirs:
-        current_dir.size += set_dir_sizes(dir)
+        printerbeepboop(pos, space, space+15, dir)
     for file in current_dir.files:
-        current_dir.size += file.size
-    return current_dir.size
+        pos.append(space)
+        file_str = get_formatted_string(pos, space+15, file.name)
+        print(file_str)
+        time.sleep(0.05)
+        pos.pop()
+    pos.pop()
+    return
 
-def get_dir_sizes(total_size: int, current_dir: dir):
-    for dir in current_dir.dirs:
-        total_size = get_dir_sizes(total_size, dir)
-    if current_dir.size <= 100000:
-        total_size += current_dir.size
-        return total_size
-    return total_size
+def get_formatted_string(pos: list, name_pos: int, name: str):
+    if name_pos == 0:
+        return name
+    name = " " + name
+    string = list(f"{name:->{name_pos}}")
+    string[:pos[-1]] = pos[-1] * [' ']
+    for i in pos:
+        string[i] = "'"
+    return ''.join(string)
 
-def get_smallest_possible_dir(required_space: int, current_best: dir, current_dir: dir):
-    for dir in current_dir.dirs:
-        current_best = get_smallest_possible_dir(required_space, current_best, dir)
-    if current_dir.size >= required_space and current_dir.size <= current_best.size:
-        current_best = current_dir
-    return current_best
-    
-            
 if __name__ == "__main__":
     data = open(r".\input\07.txt", 'r')
     inputdata = np.asarray([line.strip() for line in data])
     root = parse_input(inputdata)
-    set_dir_sizes(root)
-    ############################## PART 1 ##############################
-    print(f"the sum of the directories with size <= 100000 is {get_dir_sizes(0, root)}")
-    ############################## PART 2 ##############################
-    required_space = root.size - 40000000
-    smallest_possible_dir = get_smallest_possible_dir(required_space, root, root)
-    print(f"the smallest possible directory is {smallest_possible_dir} with size {smallest_possible_dir.size}")
+    printerbeepboop([], 0, 0, root)
