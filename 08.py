@@ -10,8 +10,10 @@ visible = np.zeros_like(inputdata, dtype=bool)
 for row in range(inputdata.shape[0]):
     for tree in range(inputdata.shape[1]):
         current_tree = inputdata[row][tree]
-        if np.all(inputdata[:row, tree] < current_tree) or np.all(inputdata[row+1:, tree] < current_tree) or np.all(inputdata[row, :tree] < current_tree) or np.all(inputdata[row, tree+1:] < current_tree):
-            visible[row][tree] = True
-            continue
+        orientations = [inputdata[:row, tree][::-1], inputdata[row, :tree][::-1], inputdata[row+1:, tree], inputdata[row, tree+1:]] # counter clockwise starting from upwards
+        for index, orientation in enumerate(orientations):
+            if np.all(orientation < current_tree):
+                visible[row][tree] = True
+                break
 
 print(f"the number of visible trees is {np.sum(visible)}")
