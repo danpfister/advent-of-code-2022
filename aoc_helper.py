@@ -22,12 +22,12 @@ class aoc_helper():
         text_file_path = self.ROOT_DIR / f"input/{self.TODAY.day:02}.txt"
         if not text_file_path.is_file():
             URL = f"https://adventofcode.com/{self.TODAY.year}/day/{self.TODAY.day}/input"
-            SESSION_COOKIE = self.get_session_cookie()
+            COOKIES = {'session': self.get_session_cookie()}
             PARAMS = {
                 "User-Agent": 'https://github.com/danpfister/advent-of-code-2022',
             }
             try:
-                request = requests.get(url=URL, cookies={'session': SESSION_COOKIE}, params=PARAMS)
+                request = requests.get(url=URL, cookies=COOKIES, params=PARAMS)
                 text_file_path.write_text(request.text)
                 print(f"downloaded input file to {text_file_path}")
                 return
