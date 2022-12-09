@@ -1,6 +1,7 @@
 import numpy as np
 import re
 import time
+import dill
 
 class file():
     def __init__(self, size: int, name: str) -> None:
@@ -83,8 +84,8 @@ def get_smallest_possible_dir(required_space: int, current_best: dir, current_di
     
             
 if __name__ == "__main__":
-    data = open(r".\input\07.txt", 'r')
-    inputdata = np.asarray([line.strip() for line in data])
+    inputfile = open(r".\input\07.txt", 'r')
+    inputdata = np.asarray([line.strip() for line in inputfile])
     root = parse_input(inputdata)
     set_dir_sizes(root)
     ############################## PART 1 ##############################
@@ -93,3 +94,5 @@ if __name__ == "__main__":
     required_space = root.size - 40000000
     smallest_possible_dir = get_smallest_possible_dir(required_space, root, root)
     print(f"the smallest possible directory is {smallest_possible_dir} with size {smallest_possible_dir.size}")
+    data = open(r".\visuals\07_directory_printing\root_data.pkl", "wb")
+    dill.dump(root, data)
