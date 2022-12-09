@@ -13,10 +13,10 @@ class aoc_helper():
     def get_session_cookie(self):
         try:
             data = json.load(open(self.ROOT_DIR / 'config.json', 'r'))
+            return data['session_cookie']
         except:
             print(f"reading config.json failed!")
             raise
-        return data['session_cookie']
         
     def get_input(self):
         text_file_path = self.ROOT_DIR / f"input/{self.TODAY.day:02}.txt"
