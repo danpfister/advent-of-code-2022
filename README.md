@@ -6,7 +6,7 @@ Solving the [Advent of Code 2022](https://adventofcode.com/2022) with Python 3.1
 The `aoc_helper.py` allows automatic downloading of the current input file and creates an empty python script for the current day.
 
 ### Usage
-Before usage, the session cookie needs to be stored in a file `config.json` in following format:
+Before usage, the [session cookie](https://github.com/wimglenn/advent-of-code-wim/issues/1) needs to be stored in a file `config.json` in following format:
 ```
 {
     "session_cookie": "your-session-cookie-here"
@@ -14,11 +14,11 @@ Before usage, the session cookie needs to be stored in a file `config.json` in f
 ```
 An optional parameter `--day` can be passed to force the download for a specific day. Running
 ```
-python aoc_helper.py --day 5
+python path/to/aoc_helper.py --day 5
 ```
 downloads the input file and creates a python script for day 5.
 
 Alternatively, the setup can be run from the powershell script `aoc_setup.ps1` with following syntax:
 ```
-& aoc_setup.ps1 -day 5
+& path/to/aoc_setup.ps1 -day 5
 ```
