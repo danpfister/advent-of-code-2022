@@ -36,4 +36,28 @@ def bfs(inputdata, start, end, distances):
         
         print(distances)
 
-bfs(inputdata, start, end, distances)
+#bfs(inputdata, start, end, distances)
+
+def reverse_bfs(inputdata, start):
+    visited = [start]
+    queue = [start]
+    while len(queue) > 0:
+        current = queue.pop(0)
+
+        if inputdata[current[0]][current[1]] == 'a':
+            print(f"finished with number of steps {distances[current[0]][current[1]]}")
+            break
+
+        for neighbor in np.asarray([current + direction for direction in [[0, 1], [1, 0], [0, -1], [-1, 0]]]):
+            if neighbor[0] not in range(inputdata.shape[0]) or neighbor[1] not in range(inputdata.shape[1]): # check if neighbor out of bounds
+                continue
+            if ord(inputdata[neighbor[0]][neighbor[1]]) < ord(inputdata[current[0]][current[1]]) - 1: # check if neighbor not too high
+                continue
+            if np.any(np.asarray([np.array_equal(neighbor, np.asarray(already_visited)) for already_visited in visited])): # check if neighbor already visited
+                continue
+            visited.append(neighbor)
+            queue.append(neighbor)
+    return current
+
+distances = np.zeros_like(inputdata, dtype=np.int32)
+bfs(inputdata, reverse_bfs(inputdata, end), end, distances)
