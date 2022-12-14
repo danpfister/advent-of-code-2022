@@ -21,8 +21,8 @@ def bfs(inputdata, start, end, distances):
         current = queue.pop(0)
 
         if np.array_equal(current, end):
+            print(distances)
             return distances[current[0]][current[1]]
-            break
 
         for neighbor in np.asarray([current + direction for direction in [[0, 1], [1, 0], [0, -1], [-1, 0]]]):
             if neighbor[0] not in range(inputdata.shape[0]) or neighbor[1] not in range(inputdata.shape[1]): # check if neighbor out of bounds
@@ -35,8 +35,7 @@ def bfs(inputdata, start, end, distances):
             distances[neighbor[0]][neighbor[1]] = distances[current[0]][current[1]] + 1
             visited = np.bitwise_or(visited, current_visit)
             queue.append(neighbor)
-        
-        #print(distances)
+    raise Exception("End was never reached!")
 
 print(f"found shortest path from current position with distance {bfs(inputdata, start, end, distances)}")
 
@@ -60,7 +59,7 @@ def reverse_bfs(inputdata, start):
                 continue
             visited = np.bitwise_or(visited, current_visit)
             queue.append(neighbor)
-    raise Exception("end was never reached!")
+    raise Exception("End was never reached!")
 
 distances = np.zeros_like(inputdata, dtype=np.int32)
 print(f"found shortest path from any a with distance {bfs(inputdata, reverse_bfs(inputdata, end), end, distances)}")
