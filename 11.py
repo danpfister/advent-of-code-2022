@@ -18,18 +18,18 @@ class Monkey():
     def add_item(self, item):
         self.items.append(item)
 
-    def turn(self):
-        print(f"monkey {self.number} starting with items {self.items}")
+    def turn(self, part):
         for item in self.items: # inspect items
             self.number_of_inspects += 1
             worry = self.operation(item)
-            worry //= 3
+            if part == 1:
+                worry //= 3
+            if part == 2:
+                worry = worry % 9_699_690 # hard-coded LCM of monkeys divisibility tests
             if worry%self.test_value == 0:
-                print(f"throwing item {worry} to monkey {self.monkey_if_true.number}")
                 self.monkey_if_true.add_item(worry)
             else:
                 self.monkey_if_false.add_item(worry)
-                print(f"throwing item {worry} to monkey {self.monkey_if_false.number}")
         self.items = []
 
 def parse_input(inputdata: list) -> list:
@@ -49,17 +49,24 @@ def parse_input(inputdata: list) -> list:
         monkey.set_monkeys(monkeys[monkey_if_true], monkeys[monkey_if_false])
     return monkeys
 
-def round(monkeys):
+def round(monkeys, part):
     for monkey in monkeys:
-        monkey.turn()
+        monkey.turn(part)
 
 if __name__ == "__main__":
     inputfile = open(r".\input\11.txt", 'r')
     inputdata = np.asarray([line.strip() for line in inputfile])
-    monkeys = parse_input(inputdata)
     ############################## PART 1 ##############################
+    monkeys = parse_input(inputdata)
     for round_number in range(20):
-        round(monkeys)
+        round(monkeys, part=1)
+    number_of_inspects_all = [monkey.number_of_inspects for monkey in monkeys]
+    number_of_inspects_all.sort(reverse=True)
+    print(f"the level of monkey business is {number_of_inspects_all[0] * number_of_inspects_all[1]}")
+    ############################## PART 2 ##############################
+    monkeys = parse_input(inputdata)
+    for round_number in range(10000):
+        round(monkeys, part=2)
     number_of_inspects_all = [monkey.number_of_inspects for monkey in monkeys]
     number_of_inspects_all.sort(reverse=True)
     print(f"the level of monkey business is {number_of_inspects_all[0] * number_of_inspects_all[1]}")
