@@ -1,44 +1,36 @@
 import numpy as np
 import re
-
-class Valve:
-    def __init__(self, name: str, flow_rate: int, tunnels: list) -> None:
-        self.name = name
-        self.flow_rate = int(flow_rate)
-        self.tunnels = tunnels
-        self.open = False
-        
-    def __repr__(self) -> str:
-        return f"valve {self.name} with flow rate {self.flow_rate}"
+import time
 
 def parse_input(inputdata: list):
-    valves = list()
+    valves = dict()
     for line in inputdata:
         match_all = re.match(re.compile(r'Valve (\w+) has flow rate=(\d+); tunnels? leads? to valves? (.+)'), line)
-        match_tunnels = re.findall(re.compile(r'(\w+)'), match_all.group(3))
-        valves.append(Valve(match_all.group(1), match_all.group(2), match_tunnels))
-    for valve in valves:
-        connections_name = valve.tunnels
-        valve.tunnels = list()
-        for connection_name in connections_name:
-            valve.tunnels.append(next(connected for connected in valves if connected.name == connection_name))
+        match_connected = re.findall(re.compile(r'(\w+)'), match_all.group(3))
+        valves[match_all.group(1)] = {
+            'flow_rate':    int(match_all.group(2)),
+            'connected':    match_connected
+        }
     return valves
 
-def release_pressure(current_valve: Valve, time_left: int, pressure_released: int):
-    print(time_left)
+def release_pressure(valves: dict, current_valve: str, time_left: int, pressure_released: int, open_valves: list):
     if time_left == 0:
         return pressure_released
-    # options are: if valve is not open: open or continue to different valve, if valve is open: continue to different valve
-    if not current_valve.open:
-        if time_left*current_valve.flow_rate > max([release_pressure(valve, time_left-1, pressure_released) for valve in current_valve.tunnels]):
-            current_valve.open = True
-            return pressure_released+time_left*current_valve.flow_rate
-    pressure_released += max([release_pressure(valve, time_left-1, pressure_released) for valve in current_valve.tunnels])
-    return pressure_released
-    
+    if len(open_valves) == 15:
+        return pressure_released
+    if valves[current_valve]['flow_rate'] == 0 or current_valve in open_valves:
+        return max([release_pressure(valves, next_valve, time_left-1, pressure_released, open_valves) for next_valve in valves[current_valve]['connected']])
+    else:
+        open_valve = release_pressure(valves, current_valve, time_left-1, pressure_released+(time_left-1)*valves[current_valve]['flow_rate'], open_valves + [current_valve])
+        move_next = max([release_pressure(valves, next_valve, time_left-1, pressure_released, open_valves) for next_valve in valves[current_valve]['connected']])
+        return max(open_valve, move_next)
+        
 
 if __name__ == "__main__":
-    inputfile = open(r".\input\16_test.txt", 'r')
+    inputfile = open(r".\input\16.txt", 'r')
     inputdata = np.asarray([line.strip() for line in inputfile])
     valves = parse_input(inputdata)
-    print(release_pressure(valves[0], 30, 0))
+    non_zero_valves = len([v for v in valves if valves[v]['flow_rate'] != 0])
+    start = time.time()
+    print(release_pressure(valves, 'AA', 30, 0, []))
+    print(f"running the recursive implementation took {time.time() - start} seconds")
