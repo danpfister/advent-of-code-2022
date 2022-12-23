@@ -2,7 +2,7 @@
 -----
 Solving the [Advent of Code 2022](https://adventofcode.com/2022) with Python 3.10
 
-## Advent of Code Helper
+## Advent of Code Download Helper
 The `aoc_helper.py` allows automatic downloading of the current input file and creates an empty python script for the current day.
 
 ### Usage
@@ -50,6 +50,6 @@ This script produces a directory tree of the input.
 
 ### Day 12: Hill Climbing Algorithm
 
-Heightmap of the jungle.
+Below is a coloured heightmap of the jungle.
 
 ![jungle heightmap](https://github.com/danpfister/advent-of-code-2022/blob/main/visuals/12_jungle_map.png?raw=true)
