@@ -22,3 +22,28 @@ Alternatively, the setup can be run from the powershell script `aoc_setup.ps1` w
 ```
 & path/to/aoc_setup.ps1 -day 5
 ```
+
+## Visualizations
+
+The visualization scripts can be found in `visuals/`.
+
+### Day 7: No Space Left On Device
+
+This script produces a directory tree of the input.
+
+```
+📂 /
+|------------ 📂 a
+|----------------------------- 📂 e
+|                |                |---------- 📗 i
+|                |---------- 📗 f
+|                |---------- 📗 g
+|                |------ 📗 h.lst
+|------------ 📂 d
+|                |---------- 📗 j
+|                |------ 📗 d.log
+|                |------ 📗 d.ext
+|                |---------- 📗 k
+|------ 📗 b.txt
+|------ 📗 c.dat
+```
