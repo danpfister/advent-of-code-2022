@@ -1,7 +1,6 @@
 import numpy as np
 import re
-import time
-import dill
+from pathlib import Path
 
 class file():
     def __init__(self, size: int, name: str) -> None:
@@ -82,11 +81,37 @@ def get_smallest_possible_dir(required_space: int, current_best: dir, current_di
         current_best = current_dir
     return current_best
     
-            
+def printerbeepboop(pos: list, previous_pos: int, space: int, current_dir):
+    dir_str =  get_formatted_string(pos, space, "\U0001F4C2 " + current_dir.name)
+    global output
+    output += dir_str + "\n"
+    pos.append(previous_pos)
+    for dir in current_dir.dirs:
+        printerbeepboop(pos, space, space+17, dir)
+    for file in current_dir.files:
+        pos.append(space)
+        file_str = get_formatted_string(pos, space+15, "\U0001F4D7 "+ file.name)
+        output += file_str + "\n"
+        pos.pop()
+    pos.pop()
+    return
+
+def get_formatted_string(pos: list, name_pos: int, name: str):
+    if name_pos == 0:
+        return name
+    name = " " + name
+    string = list(f"{name:->{name_pos}}")
+    string[:pos[-1]] = pos[-1] * [' ']
+    for i in pos:
+        string[i] = "|"
+    return ''.join(string)
+         
 if __name__ == "__main__":
     inputfile = open(r".\input\07.txt", 'r')
     inputdata = np.asarray([line.strip() for line in inputfile])
+    output = ""
     root = parse_input(inputdata)
+    
     set_dir_sizes(root)
     ############################## PART 1 ##############################
     print(f"the sum of the directories with size <= 100000 is {get_dir_sizes(0, root)}")
@@ -94,5 +119,10 @@ if __name__ == "__main__":
     required_space = root.size - 40000000
     smallest_possible_dir = get_smallest_possible_dir(required_space, root, root)
     print(f"the smallest possible directory is {smallest_possible_dir} with size {smallest_possible_dir.size}")
-    data = open(r".\visuals\07_directory_printing\root_data.pkl", "wb")
-    dill.dump(root, data)
+    ############################## VISUALIZATION ##############################    
+    printerbeepboop([], 0, 0, root)
+    path = Path.cwd()
+    output_file = open(path / 'visuals/07_printed_directory.txt', 'w', encoding='utf-8')
+    output_file.write(output)
+    output_file.close()
+    
