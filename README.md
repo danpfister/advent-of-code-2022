@@ -47,3 +47,9 @@ This script produces a directory tree of the input.
 |------ 📗 b.txt
 |------ 📗 c.dat
 ```
+
+### Day 12: Hill Climbing Algorithm
+
+Heightmap of the jungle.
+
+![jungle heightmap](https://github.com/danpfister/advent-of-code-2022/blob/main/visuals/12_jungle_map.png?raw=true)

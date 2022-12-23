@@ -1,15 +1,8 @@
 import numpy as np
-
-inputfile = open(r".\input\12.txt", 'r')
-inputdata = np.asarray([[c for c in line.strip()] for line in inputfile])
+import cv2 as cv
+from colour import Color
 
 ############################## PART 1 ##############################
-
-start = np.argwhere(inputdata == 'S')[0]
-end = np.argwhere(inputdata == 'E')[0]
-inputdata[start[0]][start[1]] = 'a'
-inputdata[end[0]][end[1]] = 'z'
-distances = np.zeros_like(inputdata, dtype=np.int32)
 
 def bfs(inputdata, start, end, distances):
     visited = np.zeros_like(inputdata, dtype=bool)
@@ -21,7 +14,6 @@ def bfs(inputdata, start, end, distances):
         current = queue.pop(0)
 
         if np.array_equal(current, end):
-            print(distances)
             return distances[current[0]][current[1]]
 
         for neighbor in np.asarray([current + direction for direction in [[0, 1], [1, 0], [0, -1], [-1, 0]]]):
@@ -36,8 +28,6 @@ def bfs(inputdata, start, end, distances):
             visited = np.bitwise_or(visited, current_visit)
             queue.append(neighbor)
     raise Exception("End was never reached!")
-
-print(f"found shortest path from current position with distance {bfs(inputdata, start, end, distances)}")
 
 def reverse_bfs(inputdata, start):
     visited = np.zeros_like(inputdata, dtype=bool)
@@ -61,5 +51,24 @@ def reverse_bfs(inputdata, start):
             queue.append(neighbor)
     raise Exception("End was never reached!")
 
-distances = np.zeros_like(inputdata, dtype=np.int32)
-print(f"found shortest path from any a with distance {bfs(inputdata, reverse_bfs(inputdata, end), end, distances)}")
+def draw_map(inputdata):
+    color1 = Color('Crimson')
+    colors = list(color1.range_to(Color('Sienna'), 26))
+    merged = np.array([[[color*255 for color in colors[ord(element)-97].get_rgb()] for element in row] for row in inputdata])
+    resized = cv.resize(merged, (inputdata.shape[1]*4, inputdata.shape[0]*4), interpolation=cv.INTER_AREA)
+    cv.imwrite(r'.\visuals\12_jungle_map.png', resized)
+
+if __name__ == "__main__":
+    inputfile = open(r".\input\12.txt", 'r')
+    inputdata = np.asarray([[c for c in line.strip()] for line in inputfile])
+
+    start = np.argwhere(inputdata == 'S')[0]
+    end = np.argwhere(inputdata == 'E')[0]
+    inputdata[start[0]][start[1]] = 'a'
+    inputdata[end[0]][end[1]] = 'z'
+    distances = np.zeros_like(inputdata, dtype=np.int32)
+    
+    print(f"found shortest path from current position with distance {bfs(inputdata, start, end, distances)}")
+    draw_map(inputdata)
+    distances = np.zeros_like(inputdata, dtype=np.int32)
+    print(f"found shortest path from any a with distance {bfs(inputdata, reverse_bfs(inputdata, end), end, distances)}")
