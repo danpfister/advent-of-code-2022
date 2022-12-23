@@ -52,8 +52,8 @@ def reverse_bfs(inputdata, start):
     raise Exception("End was never reached!")
 
 def draw_map(inputdata):
-    color1 = Color('Crimson')
-    colors = list(color1.range_to(Color('Sienna'), 26))
+    color1 = Color('#de6161')
+    colors = list(color1.range_to(Color('#2657eb'), 26))
     merged = np.array([[[color*255 for color in colors[ord(element)-97].get_rgb()] for element in row] for row in inputdata])
     resized = cv.resize(merged, (inputdata.shape[1]*4, inputdata.shape[0]*4), interpolation=cv.INTER_AREA)
     cv.imwrite(r'.\visuals\12_jungle_map.png', resized)
