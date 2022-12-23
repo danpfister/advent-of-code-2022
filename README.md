@@ -50,6 +50,5 @@ This script produces a directory tree of the input.
 
 ### Day 12: Hill Climbing Algorithm
 
-Below is a coloured heightmap of the jungle.
-
 ![jungle heightmap](https://github.com/danpfister/advent-of-code-2022/blob/main/visuals/12_jungle_map.png?raw=true)
+<p align = "center">Heightmap of the Jungle</p>
