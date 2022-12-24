@@ -25,8 +25,6 @@ Alternatively, the setup can be run from the powershell script `aoc_setup.ps1` w
 
 ## Visualizations
 
-The visualization scripts can be found in `visuals/`.
-
 ### Day 7: No Space Left On Device
 
 This script produces a directory tree of the input.
@@ -48,8 +46,14 @@ This script produces a directory tree of the input.
 |------ 📗 c.dat
 ```
 
+### Day 8: Treetop Tree House
+
+Visible trees:
+
+![alt text](https://github.com/danpfister/advent-of-code-2022/blob/main/visuals/08_visible_trees.png?raw=true)
+
 ### Day 12: Hill Climbing Algorithm
 
-Altitudemap of the Jungle
+Heightmap of the jungle
 
 ![alt text](https://github.com/danpfister/advent-of-code-2022/blob/main/visuals/12_jungle_map.png?raw=true)
