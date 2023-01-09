@@ -9,7 +9,7 @@ class aoc_helper():
         self.ROOT_DIR = Path(__file__).parent # ROOT_DIR is the advent-of-code-2022 folder
         self.TODAY = datetime.date.today()
         self.args = args
-        self.year = self.TODAY.year
+        self.year = 2022
         self.day = self.args.day if self.args.day is not None else self.TODAY.day
         self.get_input()
         self.create_new_py()
@@ -34,10 +34,10 @@ class aoc_helper():
                 request = requests.get(url=URL, cookies=COOKIES, params=PARAMS)
                 text_file_path.write_text(request.text)
                 print(f"downloaded input file to {text_file_path}")
-                return
             except:
                 print(f"aoc request failed!")
                 raise
+            return
         print(f"input file for current day already exists")
     
     def create_new_py(self):
