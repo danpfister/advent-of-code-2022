@@ -36,7 +36,7 @@ void part2(std::vector<std::string> input) {
 }
 
 int main() {
-    std::vector<std::string> input = FileReader::readFile("C:/Users/Daniel/Github/advent-of-code-2022/day01/01.txt");
+    std::vector<std::string> input = FileReader::readFile("C:/Users/Daniel/Github/advent-of-code-2022/day01/input.txt");
     part1(input);
     part2(input);
     return 0;

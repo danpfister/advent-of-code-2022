@@ -50,7 +50,7 @@ void part2(std::vector<std::string> input) {
 }
 
 int main() {
-    std::vector<std::string> input = FileReader::readFile("C:/Users/Daniel/Github/advent-of-code-2022/day02/02.txt");
+    std::vector<std::string> input = FileReader::readFile("C:/Users/Daniel/Github/advent-of-code-2022/day02/input.txt");
     part1(input);
     part2(input);
     return 0;
