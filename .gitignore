@@ -1,8 +1,17 @@
+# session cookie
 config.json
+
+# Python stuff
 __pycache__
+
+# Testing files and pickles
 test.py
 *_test.txt
 *.pkl
 
+# Build and binary directories
 /build/
 /bin/
+
+# VSCode stuff
+/.vscode/
