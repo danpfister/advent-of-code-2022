@@ -2,25 +2,43 @@
 -----
 Solving the [Advent of Code 2022](https://adventofcode.com/2022) with Python 3.10
 
-## Advent of Code Download Helper
-The `aoc_helper.py` allows automatic downloading of the current input file and creates an empty python script for the current day.
+## AOC Downloader
+
+The `aoc_downloader.py` can be used to create a folder and download the input for a specific day.
 
 ### Usage
-Before usage, the [session cookie](https://github.com/wimglenn/advent-of-code-wim/issues/1) needs to be stored in a file `config.json` in following format:
+
+The [session cookie](https://github.com/wimglenn/advent-of-code-wim/issues/1) needs to be stored in a file `config.json` in this format:
+
 ```
 {
     "session_cookie": "your-session-cookie-here"
 }
 ```
-An optional parameter `--day` can be passed to force the download for a specific day. Running
-```
-python path/to/aoc_helper.py --day 5
-```
-downloads the input file and creates a python script for day 5.
 
-Alternatively, the setup can be run from the powershell script `aoc_setup.ps1` with following syntax:
+Running `python path/to/aoc_downloader.py` creates a directory with the input file inside.
+
+Passing the optional parameter `--day` or `--year` forces the download for a specific date, otherwise it defaults to the current date (The month is always assumed to be December).
+The optional parameter `--py` adds an empty python file to the created directory.
+
+For example, running
+
 ```
-& path/to/aoc_setup.ps1 -day 5
+python path/to/aoc_downloader.py --day 17 --year 2021 --py
+```
+
+creates the folder and files as follows:
+
+```
+advent-of-code/
+|
+|-- day17/
+|     |
+|     |-- input.txt
+|     |-- day17.py
+|
+|-- aoc_downloader.py
+
 ```
 
 ## Visualizations
