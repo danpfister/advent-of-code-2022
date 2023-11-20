@@ -3,3 +3,6 @@ __pycache__
 test.py
 *_test.txt
 *.pkl
+
+/build/
+/bin/
