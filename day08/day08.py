@@ -38,7 +38,7 @@ def draw_visible(visible):
     cv.imwrite(r'.\visuals\08_visible_trees.png', image)
 
 if __name__ == "__main__":
-    data = open(r'input\08.txt', 'r')
+    data = open(r"input.txt", 'r')
     inputdata = np.asarray([[int(c) for c in line.strip()] for line in data])
     visible, scenic_score = handle_forest(inputdata)
     draw_visible(visible)

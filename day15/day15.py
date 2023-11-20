@@ -25,7 +25,7 @@ def count_invalid_positions(positions, y_position):
     return len(invalid_positions)
 
 if __name__ == "__main__":
-    inputfile = open(r".\input\15_test.txt", 'r')
+    inputfile = open(r"input.txt", 'r')
     inputdata = np.asarray([line.strip() for line in inputfile])
     positions = parse_input(inputdata)
     print(f"the number of positions a beacon cannot be in at y position 2000000 is {count_invalid_positions(positions, 10)}")

@@ -54,7 +54,7 @@ def get_dimensions(paths: list):
     
     
 if __name__ == "__main__":
-    inputfile = open(r".\input\14.txt", 'r')
+    inputfile = open(r"input.txt", 'r')
     inputdata = np.asarray([line.strip() for line in inputfile])
     paths = [[[int(corner[1]), int(corner[0])] for corner in re.findall(re.compile(r'(\d+),(\d+)(?: -> )*'), path)] for path in inputdata]
 

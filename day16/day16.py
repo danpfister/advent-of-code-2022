@@ -27,7 +27,7 @@ def release_pressure(valves: dict, current_valve: str, time_left: int, pressure_
         
 
 if __name__ == "__main__":
-    inputfile = open(r".\input\16.txt", 'r')
+    inputfile = open(r"input.txt", 'r')
     inputdata = np.asarray([line.strip() for line in inputfile])
     valves = parse_input(inputdata)
     non_zero_valves = len([v for v in valves if valves[v]['flow_rate'] != 0])

@@ -107,7 +107,7 @@ def get_formatted_string(pos: list, name_pos: int, name: str):
     return ''.join(string)
          
 if __name__ == "__main__":
-    inputfile = open(r".\input\07.txt", 'r')
+    inputfile = open(r"input.txt", 'r')
     inputdata = np.asarray([line.strip() for line in inputfile])
     output = ""
     root = parse_input(inputdata)

@@ -1,7 +1,7 @@
 import numpy as np
 import re
 
-inputfile = open(r".\input\09.txt", "r")
+inputfile = open(r"input.txt", 'r')
 inputdata = np.asarray([line.strip() for line in inputfile])
 
 ############################## PART 1 ##############################

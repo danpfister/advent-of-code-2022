@@ -59,7 +59,7 @@ def draw_map(inputdata):
     cv.imwrite(r'.\visuals\12_jungle_map.png', resized)
 
 if __name__ == "__main__":
-    inputfile = open(r".\input\12.txt", 'r')
+    inputfile = open(r"input.txt", 'r')
     inputdata = np.asarray([[c for c in line.strip()] for line in inputfile])
 
     start = np.argwhere(inputdata == 'S')[0]

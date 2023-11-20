@@ -54,7 +54,7 @@ def round(monkeys, part):
         monkey.turn(part)
 
 if __name__ == "__main__":
-    inputfile = open(r".\input\11.txt", 'r')
+    inputfile = open(r"input.txt", 'r')
     inputdata = np.asarray([line.strip() for line in inputfile])
     ############################## PART 1 ##############################
     monkeys = parse_input(inputdata)

@@ -1,6 +1,6 @@
 import numpy as np
 
-data = open(r"input\06.txt", 'r')
+data = open(r"input.txt", 'r')
 inputdata = np.asarray([line.strip() for line in data])[0]
 
 ############################## PART 1&2 ##############################

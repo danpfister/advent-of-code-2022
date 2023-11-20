@@ -1,7 +1,7 @@
 import numpy as np
 import re
 
-data = open(r"input\05.txt", 'r')
+data = open(r"input.txt", 'r')
 lines = [line[:-1] for line in data]
 
 stacks = np.full(9, '', dtype=object) # using object datatype kind of defeats the purpose of numpy, which is speed, but whatever

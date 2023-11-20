@@ -19,7 +19,7 @@ def count_faces(cubes): # ultra slow but it works
     return free_faces
     
 if __name__ == "__main__":
-    inputfile = open(r".\input\18.txt", 'r')
+    inputfile = open(r"input.txt", 'r')
     inputdata = np.asarray([line.strip() for line in inputfile])
     cubes = parse_input(inputdata)
     print(f"the number of free faces is {count_faces(cubes)}")
