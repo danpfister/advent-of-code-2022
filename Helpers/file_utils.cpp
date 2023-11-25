@@ -1,5 +1,11 @@
 #include "file_utils.h"
 
+/**
+ * @brief returns content of text file as vector of strings
+ * 
+ * @param fileName 
+ * @return std::vector<std::string> 
+ */
 std::vector<std::string> FileReader::readFile(const std::string& fileName) {
     std::vector<std::string> contents;
     std::ifstream file(fileName);
