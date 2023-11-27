@@ -11,6 +11,7 @@ add_executable(day02 day02/day02.cpp Helpers/file_utils.cpp)
 add_executable(day02_c day02/day02.c)
 add_executable(day03 day03/day03.cpp Helpers/file_utils.cpp)
 add_executable(day04 day04/day04.cpp Helpers/file_utils.cpp)
+add_executable(day05 day05/day05.cpp Helpers/file_utils.cpp)
 
 # Include the Helpers directory for header files
 include_directories(Helpers)
