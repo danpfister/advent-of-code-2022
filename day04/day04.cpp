@@ -1,4 +1,4 @@
-#include <../Helpers/file_utils.h>
+#include <file_utils.h>
 #include <regex>
 
 void part1(std::vector<std::string>& input) {
