@@ -2,40 +2,35 @@
 #include <cstdint>
 #include <bit>
 
-void part1(std::vector<std::string> input) {
-    std::string buffer = input[0];
-
+int findUniqueValues(std::string buffer, int windowSize) {
     std::uint32_t values = 0;
     int currentIndex = 0;
     // iterate until there are 4 ones in the binary representation of the window
-    while (std::popcount(values) != 4) {
-        std::string window =  buffer.substr(currentIndex, 4);
+    while (std::popcount(values) != windowSize) {
+        std::string window =  buffer.substr(currentIndex, windowSize);
         values = 0;
         for (const int & symbol : window) {
-            // each letter getts mapped to a different position in the 32bit int
+            // each letter gets mapped to a different position in the 32bit int
+            std::uint32_t values_before = values;
             values |= 0b1 << (symbol - 97);
+            // break if nothing changed (i.e. we added a value which already was in the 32bit int)
+            // should lead to a tiny speedup
+            if (values_before == values) {
+                break;
+            }
         }
         currentIndex++;
     }
 
-    std::cout << "The location of the marker is at: " << currentIndex + 3 << std::endl;
+    return currentIndex + windowSize - 1;
+}
+
+void part1(std::vector<std::string> input) {
+    std::cout << "The location of the marker is at: " << findUniqueValues(input[0], 4) << std::endl;
 }
 
 void part2(std::vector<std::string> input) {
-    std::string buffer = input[0];
-
-    std::uint32_t values = 0;
-    int currentIndex = 0;
-    while (std::popcount(values) != 14) {
-        std::string window =  buffer.substr(currentIndex, 14);
-        values = 0;
-        for (const int & symbol : window) {
-            values |= 0b1 << (symbol - 97);
-        }
-        currentIndex++;
-    }
-    
-    std::cout << "The location of the marker is at: " << currentIndex + 13 << std::endl;
+    std::cout << "The location of the marker is at: " << findUniqueValues(input[0], 14) << std::endl;
 }
 
 int main() {
